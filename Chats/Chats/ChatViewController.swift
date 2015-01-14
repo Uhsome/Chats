@@ -6,7 +6,7 @@ let toolBarMinHeight: CGFloat = 44
 let textViewMaxHeight: (portrait: CGFloat, landscape: CGFloat) = (portrait: 272, landscape: 90)
 let messageSoundOutgoing: SystemSoundID = createMessageSoundOutgoing()
 
-class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
+public class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
     let chat: Chat
     var tableView: UITableView!
     var toolBar: UIToolbar!
@@ -14,7 +14,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var sendButton: UIButton!
     var rotating = false
 
-    override var inputAccessoryView: UIView! {
+    override public var inputAccessoryView: UIView! {
     get {
         if toolBar == nil {
             toolBar = UIToolbar(frame: CGRectMake(0, 0, 0, toolBarMinHeight-0.5))
@@ -61,15 +61,15 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         title = chat.user.name
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func canBecomeFirstResponder() -> Bool {
+    override public func canBecomeFirstResponder() -> Bool {
         return true
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         chat.loadedMessages = [
@@ -112,18 +112,18 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
-    override func viewDidAppear(animated: Bool)  {
+    override public func viewDidAppear(animated: Bool)  {
         super.viewDidAppear(animated)
         tableView.flashScrollIndicators()
     }
 
-    override func viewWillDisappear(animated: Bool)  {
+    override public func viewWillDisappear(animated: Bool)  {
         super.viewWillDisappear(animated)
         chat.draft = textView.text
     }
 
     // This gets called a lot. Perhaps there's a better way to know when `view.window` has been set?
-    override func viewDidLayoutSubviews()  {
+    override public func viewDidLayoutSubviews()  {
         super.viewDidLayoutSubviews()
 
         if !chat.draft.isEmpty {
@@ -135,7 +135,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
 //    // #iOS7.1
-    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+    override public func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         super.willAnimateRotationToInterfaceOrientation(toInterfaceOrientation, duration: duration)
 
         if UIInterfaceOrientationIsLandscape(toInterfaceOrientation) {
@@ -155,11 +155,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return chat.loadedMessages.count
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chat.loadedMessages[section].count + 1 // for sent-date cell
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(MessageSentDateCell), forIndexPath: indexPath) as MessageSentDateCell
             let message = chat.loadedMessages[indexPath.section][0]

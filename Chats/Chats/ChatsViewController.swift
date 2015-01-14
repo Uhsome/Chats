@@ -1,6 +1,6 @@
 import UIKit
 
-class ChatsViewController: UITableViewController {
+public class ChatsViewController: UITableViewController {
     var chats: [Chat] { return account.chats }
 
     convenience override init() {
@@ -8,7 +8,7 @@ class ChatsViewController: UITableViewController {
         title = "Chats"
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         let minute: NSTimeInterval = 60, hour = minute * 60, day = hour * 24
@@ -44,17 +44,17 @@ class ChatsViewController: UITableViewController {
         tableView.registerClass(ChatCell.self, forCellReuseIdentifier: NSStringFromClass(ChatCell))
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chats.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(ChatCell), forIndexPath: indexPath) as ChatCell
         cell.configureWithChat(account.chats[indexPath.row])
         return cell
     }
 
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    override public func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             account.chats.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -64,7 +64,7 @@ class ChatsViewController: UITableViewController {
         }
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let chat = chats[indexPath.row]
         let chatViewController = ChatViewController(chat: chat)
         navigationController?.pushViewController(chatViewController, animated: true)
