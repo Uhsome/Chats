@@ -3,7 +3,7 @@ import UIKit
 public class ChatsViewController: UITableViewController {
     var chats: [Chat] { return account.chats }
 
-    convenience override init() {
+    convenience public override init() {
         self.init(style: .Plain)
         title = "Chats"
     }
