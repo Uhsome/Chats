@@ -45,12 +45,47 @@ public class ChatsViewController: UITableViewController {
     }
 
     override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chats.count
+        return account.chats.count
+    }
+    
+    public func IdForPersonAtIndex(index: Int) -> Int {
+        return account.chats[index].user.ID
+    }
+    
+    public func firstNameForPersonAtIndex(index: Int) -> NSString {
+        return account.chats[index].user.firstName!
+    }
+    
+    public func lastNameForPersonAtIndex(index: Int) -> NSString {
+        return account.chats[index].user.lastName!
+    }
+    
+    public func messageTextForPersonAtIndex(index: Int) -> NSString {
+        return account.chats[index].lastMessageText
+    }
+    
+    public func messageDateForPersonAtIndex(index: Int) -> NSDate {
+        return account.chats[index].lastMessageSentDate
+    }
+    
+    public func imageForPersonAtIndex(index: Int) -> UIImage {
+        let ID = account.chats[index].user.ID
+        return UIImage(named: "User\(ID).jpg")!
+    }
+    
+    func chatForIndex(index: Int) -> Chat {
+        return Chat(user: User(ID: 0,
+            firstName: firstNameForPersonAtIndex(index),
+            lastName: lastNameForPersonAtIndex(index)),
+            lastMessageText: messageTextForPersonAtIndex(index),
+            lastMessageSentDate: messageDateForPersonAtIndex(index))
     }
 
     override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(ChatCell), forIndexPath: indexPath) as ChatCell
-        cell.configureWithChat(account.chats[indexPath.row])
+        let chat = chatForIndex(indexPath.row)
+        chat.user.picture = imageForPersonAtIndex(indexPath.row)
+        cell.configureWithChat(chat)
         return cell
     }
 

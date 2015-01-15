@@ -36,7 +36,5 @@ class User {
         self.lastName = lastName
     }
 
-    func pictureName() -> String {
-        return "User\(ID).jpg"
-    }
+    var picture : UIImage?
 }

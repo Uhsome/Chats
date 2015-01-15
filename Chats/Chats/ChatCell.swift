@@ -71,7 +71,7 @@ class ChatCell: UITableViewCell {
 
     func configureWithChat(chat: Chat) {
         let user = chat.user
-        userPictureImageView.image = UIImage(named: user.pictureName())
+        userPictureImageView.image = user.picture
         if userPictureImageView.image == nil {
             let initials = user.initials
             if initials != nil {
