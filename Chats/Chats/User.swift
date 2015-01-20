@@ -1,7 +1,7 @@
 import Foundation
 
 class User {
-    let ID: Int
+    let ID: String
     var firstName: String?
     var lastName: String?
     var name: String? {
@@ -26,11 +26,11 @@ class User {
         return initials
     }
 
-    init(ID: Int) {
+    init(ID: String) {
         self.ID = ID
     }
 
-    convenience init(ID: Int, firstName: String?, lastName: String?) {
+    convenience init(ID: String, firstName: String?, lastName: String?) {
         self.init(ID: ID)
         self.firstName = firstName
         self.lastName = lastName
