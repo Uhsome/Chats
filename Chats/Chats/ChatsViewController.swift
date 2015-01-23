@@ -70,7 +70,11 @@ public class ChatsViewController: UITableViewController {
     
     public func imageForPersonAtIndex(index: Int) -> UIImage {
         let ID = account.chats[index].user.ID
-        return UIImage(named: "User\(ID).jpg")!
+        let image: UIImage? = UIImage(named: "User\(ID).jpg")
+        if image == nil {
+            return UIImage()
+        }
+        return image!;
     }
     
     func chatForIndex(index: Int) -> Chat {
