@@ -133,6 +133,11 @@ public class ChatViewController: UIViewController, UITableViewDataSource, UITabl
             textView.becomeFirstResponder()
         }
     }
+    
+    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        // temporary hack to prevent it from crashing on iOS 7
+        return tableView.estimatedRowHeight
+    }
 
 //    // #iOS7.1
     override public func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
