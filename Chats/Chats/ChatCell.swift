@@ -3,8 +3,8 @@ import UIKit
 let chatCellHeight: CGFloat = 72
 let chatCellInsetLeft = chatCellHeight + 8
 
-class ChatCell: UITableViewCell {
-    let userPictureImageView: UIImageView
+public class ChatCell: UITableViewCell {
+    public let userPictureImageView: UIImageView
     let userNameLabel: UILabel
     let lastMessageTextLabel: UILabel
     let lastMessageSentDateLabel: UILabel
@@ -65,7 +65,7 @@ class ChatCell: UITableViewCell {
         userPictureImageView.addConstraint(NSLayoutConstraint(item: userNameInitialsLabel, attribute: .CenterY, relatedBy: .Equal, toItem: userPictureImageView, attribute: .CenterY, multiplier: 1, constant: -1))
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
