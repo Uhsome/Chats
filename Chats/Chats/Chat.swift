@@ -2,11 +2,11 @@ import Foundation
 
 var dateFormatter = NSDateFormatter()
 
-class Chat {
-    let user: User
-    var lastMessageText: String
-    var lastMessageSentDate: NSDate
-    var lastMessageSentDateString: String {
+public class Chat : NSObject {
+    public var user: User
+    public var lastMessageText: String
+    public var lastMessageSentDate: NSDate
+    public var lastMessageSentDateString: String {
     return formatDate(lastMessageSentDate)
     }
     var loadedMessages = [[Message]]()
@@ -14,13 +14,13 @@ class Chat {
     var hasUnloadedMessages = false
     var draft = ""
 
-    init(user: User, lastMessageText: String, lastMessageSentDate: NSDate) {
+    public init(user: User, lastMessageText: String, lastMessageSentDate: NSDate) {
         self.user = user
         self.lastMessageText = lastMessageText
         self.lastMessageSentDate = lastMessageSentDate
     }
     
-    func isDateInToday(date: NSDate) -> Bool {
+    public func isDateInToday(date: NSDate) -> Bool {
         let units = NSCalendarUnit.CalendarUnitEra|NSCalendarUnit.YearCalendarUnit|NSCalendarUnit.MonthCalendarUnit|NSCalendarUnit.DayCalendarUnit
         let cal = NSCalendar.currentCalendar()
         
@@ -33,7 +33,7 @@ class Chat {
         return aDate.isEqualToDate(today)
     }
     
-    func dayOccuredDuringLast7Days(date : NSDate) -> Bool {
+    public func dayOccuredDuringLast7Days(date : NSDate) -> Bool {
         let now = NSDate()
         var today : NSDate?
         NSCalendar.currentCalendar().rangeOfUnit(.DayCalendarUnit, startDate: &today, interval: nil, forDate: now)
@@ -48,7 +48,7 @@ class Chat {
         return false
     }
 
-    func formatDate(date: NSDate) -> String {
+    public func formatDate(date: NSDate) -> String {
         let calendar = NSCalendar.currentCalendar()
 
         let last18hours = (-18*60*60 < date.timeIntervalSinceNow)

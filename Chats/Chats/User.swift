@@ -1,10 +1,10 @@
 import Foundation
 import UIKit
 
-class User {
-    let ID: String
-    var firstName: String?
-    var lastName: String?
+public class User : NSObject {
+    public var ID: String
+    public var firstName: String?
+    public var lastName: String?
     var name: String? {
     if firstName != nil && lastName != nil {
         return firstName! + " " + lastName!
@@ -37,5 +37,5 @@ class User {
         self.lastName = lastName
     }
 
-    var picture : UIImage?
+    public var picture : UIImage?
 }
